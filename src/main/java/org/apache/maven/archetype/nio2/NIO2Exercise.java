@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class NIO2Exercise {
 	
@@ -38,19 +39,9 @@ public class NIO2Exercise {
 	
 	
 	public static void getAllJavaFileNames() throws IOException{
-
-		
-		/*List<File> files =Files.list(Paths.get("C:\\Users\\Cyclopes\\Documents\\hclws\\Streams"))
-                .filter(Files::isRegularFile)
-                .filter(path -> path.toString().endsWith(".java"))
-                .map(Path::toFile)
-                .collect(Collectors.toList());
-		Paths.get("C:\\Users\\Cyclopes\\Documents\\hclws\\Streams")
-		files.forEach(System.out::println);
-	*/
-		Path configFilePath = FileSystems.getDefault().getPath("C:\\User\\Cyclopes\\Documents\\hclws\\Streams");
-		List<Path> fileWithName = Files.walk(configFilePath)
-		                .filter(s -> s.toString().endsWith(".java"))
+		Path path = Paths.get("C:\\Users\\Cyclopes\\Documents\\hclws\\Streams\\src");
+		List<Path> fileWithName = Files.walk(path)
+						.filter(s -> s.toString().endsWith(".java"))
 		                .map(Path::getFileName)
 		                .sorted()
 		                .collect(Collectors.toList());
@@ -59,6 +50,20 @@ public class NIO2Exercise {
 		    System.out.println(name);
 		}
 	}
+	
+	
+	public static void checkFile(String filename, String pathAbsolute) throws IOException {
+		Path path = Paths.get(pathAbsolute);
+		boolean check=Files.walk(path)
+				.filter(s -> s.toString().equals(filename))
+				.map(Path::getFileName) != null;
+		
+		if(check)
+			System.out.println("File Present...!!");
+		}
+        
+	
+	
 
 	public static void main(String[] args) throws IOException {
 	
@@ -68,6 +73,11 @@ public class NIO2Exercise {
 		System.out.println("\nList all the files ending with .java in the current project's src folder and its subfolders :");
 		NIO2Exercise.getAllJavaFileNames();
 
+		System.out.println("\nFile Present at an absolute path :");
+		NIO2Exercise.checkFile(null,"C:\\Users\\Cyclopes\\Documents\\hclws\\Streams");
 	}
+	
+	
+	
 
 }
