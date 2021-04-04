@@ -1,23 +1,16 @@
 package org.apache.maven.archetype.nio2;
-
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class NIO2Exercise {
-	
 	public static void getExpiredTablets(String filename, String manufacturer) throws IOException {		
 		Path path=Paths.get(filename);
 		LocalDate todayDate=LocalDate.now();
@@ -45,7 +38,6 @@ public class NIO2Exercise {
 		                .map(Path::getFileName)
 		                .sorted()
 		                .collect(Collectors.toList());
-
 		for (Path name : fileWithName) {
 		    System.out.println(name);
 		}
@@ -56,15 +48,12 @@ public class NIO2Exercise {
 		Path path = Paths.get(pathAbsolute);
 		boolean check=Files.walk(path)
 				.filter(s -> s.toString().equals(filename))
-				.map(Path::getFileName) != null;
-		
+				.map(Path::getFileName) != null;		
 		if(check)
 			System.out.println("File Present...!!");
 		}
         
 	
-	
-
 	public static void main(String[] args) throws IOException {
 	
 		System.out.println("\nA Map with key as Tablet name and value as expiry date of tablets which are Expired :");
@@ -74,7 +63,7 @@ public class NIO2Exercise {
 		NIO2Exercise.getAllJavaFileNames();
 
 		System.out.println("\nFile Present at an absolute path :");
-		NIO2Exercise.checkFile(null,"C:\\Users\\Cyclopes\\Documents\\hclws\\Streams");
+		NIO2Exercise.checkFile("Tablet.txt","C:\\Users\\Cyclopes\\Documents\\hclws\\Streams");
 	}
 	
 	
